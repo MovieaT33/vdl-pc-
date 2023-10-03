@@ -16,7 +16,7 @@ def clear() -> None:
 
 def main() -> None:
     print("Initialization program...")
-    url = "https://movieat33.pythonanywhere.com"
+    url = "YOUR DOMEN"
 
     program_name = "vdc (pc)"
     full_program_name = "Virtual DataBase Console (PC)"
