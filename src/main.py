@@ -11,7 +11,9 @@ class LoginError(BaseException):
 
 
 def clear() -> None:
-    os.system("cls")
+    if os.name == "nt":
+        os.system("cls")
+    os.system("clear")
 
 
 def main() -> None:
@@ -20,7 +22,7 @@ def main() -> None:
 
     program_name = "vdc (pc)"
     full_program_name = "Virtual DataBase Console (PC)"
-    version = "2.0.0"
+    version = "2.1.0"
     license_ = "GNU"
     program = f"program_name={program_name}&full_program_name={full_program_name}&version={version}&license={license_}"
     anim = "|/-\\"
@@ -34,16 +36,23 @@ def main() -> None:
     print("Login")
 
     username = input("Username: ")
-    user_password = getpass.getpass("Password: ")
-    db_name = input("DataBase name: ")
-    password = getpass.getpass("DataBase password: ")
+    user_passwd = getpass.getpass("User passwd: ")
+    filename = input("Filename name: ")
+    file_passwd = getpass.getpass("File passwd: ")
 
-    prefix = f"username={username}&user_password={user_password}&db_name={db_name}&password={password}"
-    response = requests.get(f"{url}/api/v0/verification_password?{program}&{prefix}")
-    if response.status_code != 200 or response.text != "Password correctly":
+    prefix = f"username={username}&user_passwd={user_passwod}&filename={filename}&file_passwd={file_passwd}"
+    response = requests.get(f"{url}/api/v0/verif_user?{program}&{prefix}")
+    if response.status_code != 200:
         raise LoginError(
             f"Status code isn't 200. Code: {response.status_code}"
         )
+
+    response = requests.get(f"{url}/api/v0/verif_file?{program}&{prefix}")
+    if response.status_code != 200:
+        raise LoginError(
+            f"Status code isn't 200. Code: {response.status_code}"
+        )
+ 
     clear()
 
     run = True
