@@ -40,7 +40,7 @@ def main() -> None:
     filename = input("Filename name: ")
     file_passwd = getpass.getpass("File passwd: ")
 
-    prefix = f"username={username}&user_passwd={user_passwod}&filename={filename}&file_passwd={file_passwd}"
+    prefix = f"username={username}&user_passwd={user_passwd}&filename={filename}&file_passwd={file_passwd}"
     response = requests.get(f"{url}/api/v0/verif_user?{program}&{prefix}")
     if response.status_code != 200:
         raise LoginError(
