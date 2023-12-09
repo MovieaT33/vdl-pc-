@@ -2,8 +2,8 @@ import os
 import sys
 import time
 import getpass
-import requests
 import traceback
+import requests
 
 
 class LoginError(BaseException):
